@@ -1,0 +1,11 @@
+.itemContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+    }
+}

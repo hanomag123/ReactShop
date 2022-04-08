@@ -1,0 +1,23 @@
+.product {
+    width: 200px;
+
+    img {
+        height: 200px;
+        width: 200px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+    div {
+        text-align: center;
+    }
+    button {
+        width: 200px;
+        border-radius: 5px;
+        background: black;
+        color: white;
+        border: unset;
+        height: 30px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+}
