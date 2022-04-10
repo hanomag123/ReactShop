@@ -1,6 +1,10 @@
+@import './../../assets/images/UIkit.scss';
 .productContainer {
-    padding: 0 15px;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+    box-sizing: border-box;
+    @extend %borders;
+    height: 100%;
+    width: 100%;
 }

@@ -1,0 +1,22 @@
+$fontfamily: Hind Siliguri, sans-serif;
+
+%headerText {
+    font-family: $fontfamily;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 23px;
+    /* identical to box height */
+    
+    text-transform: uppercase;
+    
+    /* B */
+    
+    color: #030D15;
+}
+
+%borders {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+

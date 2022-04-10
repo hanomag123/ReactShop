@@ -1,3 +1,4 @@
+@import '../../assets/images/UIkit.scss';
 * {
 margin: 0;
 padding: 0;
@@ -7,18 +8,66 @@ box-sizing: border-box;
 .item {
     height: 300px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
+    display: grid;
+    // grid-template-columns: 1fr 2fr;
+    grid-auto-rows: 40px;
     overflow: hidden;
+    grid-template-areas:    'img .'
+                            'img title'
+                            'img description'
+                            'img price'
+                            'img rate'
+                            'img .';
+    justify-items: start;
+    grid-column-gap: 30px;
+    @extend %borders;
+    .price {
+        grid-area: price;
+        align-self: center;
+    }
+    .rate {
+        grid-area: rate;
+        align-self: center;
+    }
     .title {
-        align-self: flex-start;
+        align-self: end;
+        grid-area: title;
+        font-family: 'Hind Siliguri';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 40px;
+        text-align: center;
+        
+        /* B */
+        
+        color: #030D15;
+        overflow: hidden;
+    }
+    .description {
+        grid-area: description;
+        font-family: 'Hind Siliguri';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+        /* or 150% */
+        
+        
+        /* B */
+        
+        color: #030D15;
+        
+        opacity: 0.6;
+        overflow: hidden;
     }
     .image {
-        height: 300px;
-        width: 300px;
+        grid-area: img;
+        box-sizing: border-box;
+        padding: 10%;
+        height: 248px;
+        width: 262px;
         object-fit: contain;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
 }

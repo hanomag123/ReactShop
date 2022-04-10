@@ -10,4 +10,8 @@ html, body, .app {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    &:first-child {
+        top: 0;
+        position: sticky;
+    }
 }

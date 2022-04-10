@@ -1,4 +1,69 @@
+@import './../../assets/images/UIkit.scss';
+
 .header {
+    height: 90px;
+    @extend %headerText;
     background-color: aqua;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #ffff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    @extend %borders;
+    a, a:active{
+        color: #030D15;
+        text-decoration: none;
+        position: relative;
+    }
+    nav {
+        width: 573px;
+        height: 23px;
+        display: flex;
+        gap: 56px;
+    }
+}
+
+.busket {
+    width: 300px;
+    height: 23px;
+    display: flex;
+    align-self: center;
+    justify-content: space-around;
+    .busketIcon {
+        position: relative;
+    }
+    .busketIcon::after {
+        position: absolute;
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-color: #C72535;
+        border-radius: 50%;
+        right: -5px;
+        top: -2px;
+    }
+    .count {
+        position: absolute;
+        right: -1.5px;
+        top: -3px;
+        z-index: 1;
+        font-family: 'Hind Siliguri';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 16px;
+        text-transform: uppercase;
+        
+        color: #FFFFFF;
+    }
+    .money {
+        height: 23px;
+    }
+    input {
+        border: 0;
+        background: no-repeat top right url(../../assets/images/Busket/search.svg);
+    }
 }

@@ -11,22 +11,28 @@ import styles from './App.module.scss';
 import { Item } from './components/Item/Item';
 
 export const App = () => {
-  const [busket, setBusket] = useState([]);
-  const [products, setProducts] = useState(productsHard);
-
+  const [busket, setBusket] = useState(JSON.parse(localStorage.getItem('busket')) || []);
+  const [products, setProducts] = useState([]);
+  const [input, setInput] = useState('')
+  const [selected, setSelected] = useState([])
   return (
     <div className={styles.app}>
       <div>
-        <Header busket={busket}/>
-        {/* <Banner /> */}
-
+        <Header 
+          busket={busket}
+          input={input}
+          setInput={setInput}
+        />
         <Routes>
           <Route path="/" element={
             <Main 
+              input={input}
               products={products} 
               setProducts={setProducts} 
               setBusket={setBusket}
               busket={busket}
+              selected={selected}
+              setSelected={setSelected}
             />
           } />
           <Route path="/product" element={<div>PRODUCT</div>} />

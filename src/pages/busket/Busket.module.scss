@@ -1,0 +1,11 @@
+@import '../../assets/images/UIkit.scss';
+
+.busket {
+    @extend %borders;
+    .head {
+        width: 100%;
+        height: 100px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+    }
+}

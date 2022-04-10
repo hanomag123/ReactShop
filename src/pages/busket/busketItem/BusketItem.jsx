@@ -17,25 +17,13 @@ export const BusketItem = ({
 
     const changeInput = (e) => {
         const text = e.target.value;
-        // const newCount = busket.map(el => {
-        //     if(el.id === id) {
-        //         return ({
-        //             ...el,
-        //             count: Number(text)
-        //         })
-        //     }else {
-        //         return el
-        //     }
-        // })
         setBusket(newCount(busket, id, Number(text)))
     }
 
     return(
         <div className={styles.itemContainer}>
             <button onClick={onDelete}>X</button>
-            <Link to={`/product/${title}`}>
-            <img src={img} />
-            </Link>
+            <Link to={`/product/${title.replace(/ |\//g, '')}`}><img src={img} /></Link>
             <div>{title}</div>
             <div>{price}</div>
             <input onChange={changeInput} type="number" min="1" value={count} />

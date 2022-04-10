@@ -1,26 +1,26 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { Link } from "react-router-dom";
+import styles from '../Header.module.scss';
 
-import busketImg from '../../../assets/images/basket.svg';
+import busketIcon from '../../../assets/images/Busket/busket.svg';
 
-export const Busket = ({ busket }) => {
+export const Busket = ({ busket, input , setInput }) => {
 
     const getSum = () => {
-        // let sum = 0;
-        // busket.forEach(el => sum = sum + el.price)
-        // return sum
-        
         return busket.reduce((acc, el) => {
             return acc + (el.price * el.count)
         }, 0).toFixed(2)
     }
-
     console.log(getSum())
     return(
-        <Link to='/busket'>
-            <img src={busketImg} />
-            <div>{busket.length}</div>
-            <div>{getSum()}</div>
-        </Link>
+        <div className={styles.busket}>
+            <input value={input} onChange={e => setInput(e.target.value)}></input>
+            <Link className={styles.busketIcon} to='/busket'>
+                <img src={busketIcon} />
+                <div className={styles.count}>{busket.length}</div>
+            </Link>
+            <div className={styles.money}>$ {getSum()}</div>
+        </div>
     )
 }
+

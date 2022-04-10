@@ -3,19 +3,23 @@ import { Link } from "react-router-dom";
 
 import { Busket } from './busket/busket';
 import { urlLogo } from '../../constants';
+import logo from '../../assets/images/logo.png'
 
 import styles from  './Header.module.scss';
 
-export const Header = ({ busket }) => {
+export const Header = ({ busket , input, setInput}) => {
     return(
         <header className={styles.header}>
-            <img src={urlLogo} />
-            <div>
+            <img src={logo} />
+            <nav>
                 <Link to='/'>Home</Link>
+                <div>About</div>
+                <div>Product</div>
+                <div>Blog</div>
                 <div>Shop</div>
-                <div>Contact</div>
-            </div>
-            <Busket busket={busket}/>
+                <div>Contact us</div>
+            </nav>
+            <Busket busket={busket} input={input} setInput={setInput}/>
         </header>
     )
 }

@@ -9,14 +9,8 @@ export const Busket = ({ busket, setBusket }) => {
     const filtered = busket.filter(({id}, index) => !ids.includes(id, index + 1))
 
     return(
-        <div>
-            <div>
-            <div>Product</div>
-            <div>Price</div>
-            <div>Quantity</div>
-            <div>Subtotal</div>
-            </div>
-            <div>
+            <div className={styles.busket}>
+            <div className={styles.items}>
                 {
                     filtered.map(el => (
                         <BusketItem 
