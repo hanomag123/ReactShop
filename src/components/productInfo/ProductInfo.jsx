@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { StarRating } from '../StarRating/StarRating';
+import Rating from '@mui/material/Rating';
+
 
 import styles from './ProductInfo.module.scss';
 
@@ -18,7 +20,8 @@ export const ProductInfo = ({
             <div className={styles.product__container}>
                 <div className={styles.name}>{name}</div>
                 <div className={styles.price}>$ {price} / <s>$ {price}</s></div>
-                <StarRating rating={rating}/>
+                <Rating name="read-only" value={rating} readOnly />
+                {/* <StarRating rating={rating}/> */}
             </div>
         </section>
     )

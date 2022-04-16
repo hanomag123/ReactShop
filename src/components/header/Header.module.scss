@@ -13,6 +13,7 @@
     top: 0;
     z-index: 1;
     @extend %borders;
+    padding-right: 5%;
     a, a:active{
         color: #030D15;
         text-decoration: none;

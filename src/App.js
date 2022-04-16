@@ -12,9 +12,11 @@ import { Item } from './components/Item/Item';
 
 export const App = () => {
   const [busket, setBusket] = useState(JSON.parse(localStorage.getItem('busket')) || []);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(JSON.parse(localStorage.getItem('filteredArray')) || []);
   const [input, setInput] = useState('')
   const [selected, setSelected] = useState([])
+  const [price, setPrice] = useState(false)
+  const [checkPrice, setCheckPrice] = useState({min: 0, max: 99999999})
   return (
     <div className={styles.app}>
       <div>
@@ -22,6 +24,7 @@ export const App = () => {
           busket={busket}
           input={input}
           setInput={setInput}
+          setPrice={setPrice}
         />
         <Routes>
           <Route path="/" element={
@@ -33,6 +36,8 @@ export const App = () => {
               busket={busket}
               selected={selected}
               setSelected={setSelected}
+              price={price}
+              setCheckPrice={setCheckPrice}
             />
           } />
           <Route path="/product" element={<div>PRODUCT</div>} />

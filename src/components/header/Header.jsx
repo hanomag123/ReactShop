@@ -7,14 +7,15 @@ import logo from '../../assets/images/logo.png'
 
 import styles from  './Header.module.scss';
 
-export const Header = ({ busket , input, setInput}) => {
+export const Header = ({ busket , input, setInput, setPrice}) => {
+
     return(
         <header className={styles.header}>
             <img src={logo} />
             <nav>
                 <Link to='/'>Home</Link>
                 <div>About</div>
-                <div>Product</div>
+                <div onClick={() => setPrice(current => !current)}>Product</div>
                 <div>Blog</div>
                 <div>Shop</div>
                 <div>Contact us</div>
