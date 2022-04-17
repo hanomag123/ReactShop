@@ -4,7 +4,7 @@ import { throttle } from "../../../Helper";
 
 const minDistance = 10;
 
-export const SliderPrice = memo(({filter, setFilter}) => {
+export const SliderPrice = memo(({filter, setFilter, products}) => {
     const handleChange1 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
         return;
@@ -29,4 +29,4 @@ export const SliderPrice = memo(({filter, setFilter}) => {
             />
         </div>
     );
-}, () => false)
+})

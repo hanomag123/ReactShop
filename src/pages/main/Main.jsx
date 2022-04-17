@@ -1,27 +1,23 @@
-import React, { useEffect , useMemo, useState, useReducer} from 'react';
+import React, { useEffect , useReducer} from 'react';
 
 import { ProductInfo } from '../../components/productInfo/ProductInfo';
 import { urlForProduct } from '../../constants';
 
 import styles from './Main.module.scss';
 import { newCount } from '../../Helper';
-import {SliderPrice} from './sliderPrice/SliderPrice'
-import Checkbox from '@mui/material/Checkbox';
+import { Filter } from '../../components/filter/Filter';
 
 export const Main = React.memo(({
     products, setProducts, setBusket, busket, input, selected, setSelected, price, setCheckPrice
 }) => {
-    const Filter = {
+    const FILTER = {
         price: [0, 1000],
         'men\'s clothing': true, 
-                    'women\'s clothing': true, 
-                    'electronics': true, 
-                    'jewelery': true
+        'women\'s clothing': true, 
+        'electronics': true, 
+        'jewelery': true
     }
-    const [filter, setFilter] = useReducer((user, newData) => ({...user, ...newData}), Filter)
-    const init = useMemo(() => {
-        
-    }, [])
+    const [filter, setFilter] = useReducer((user, newData) => ({...user, ...newData}), FILTER)
     const getData = async() => {
         if (!localStorage.getItem('products')) {
         const data = await fetch(urlForProduct);
@@ -33,7 +29,6 @@ export const Main = React.memo(({
             setProducts(JSON.parse(localStorage.getItem('products')))
         }
     }
-    const category = ['men\'s clothing', 'women\'s clothing', 'electronics', 'jewelery']
     useEffect(() => {
         getData();
     }, [])
@@ -72,31 +67,6 @@ export const Main = React.memo(({
             localStorage.setItem('busket', JSON.stringify(abc))
         }
     }
-    const changeInput = e => {
-        console.log('hello')
-        if (e.target.value < 0) {
-            e.target.value = 0
-        } else if (e.target.value > 1000) {
-            e.target.value = 1000
-        }
-        console.log(filter)
-        e.target.name === 'min' ? setFilter({price: [+e.target.value, filter.price[1]]}) : (
-            setFilter({price: [filter.price[0], +e.target.value]})
-        )
-
-    }
-    const handleBlur = (e) => {
-        if (e.target.value < 0) {
-            e.target.value = 0
-        } else if (e.target.value > 1000) {
-            e.target.value = 1000
-        }
-    };
-    console.log('render')
-    const changeBox = (e) => {
-        // setFilter(current => Object.assign({}, current, current.categorys[e.target.id] = !current.categorys[e.target.id]))
-        setFilter({[e.target.id]: e.target.checked})
-    }
     return (
         <>
             <div className={styles.productContainer}>
@@ -114,12 +84,7 @@ export const Main = React.memo(({
                     ))
                 }
             </div>
-            <div className={styles.filter}>
-                <span>от</span><input name="min" value={filter.price[0]} onBlur={e => handleBlur(e)} onChange={e=>changeInput(e)} type="number" />
-                <span>до</span><input name="max" value={filter.price[1]} onBlur={e => handleBlur(e)} onChange={e=>changeInput(e)} type="number" />
-                <SliderPrice filter={filter} setFilter={setFilter}/>
-                {[...Array(category.length)].map((_, i) => <div key={i}><Checkbox checked={filter[category[i]]} onChange={e => changeBox(e)} id={category[i]} /><span>{category[i]}</span></div>)}
-            </div>
+            <Filter filter={filter} setFilter={setFilter} products={products} />
         </>
     )
-})
+}, (prev, next) => prev.products?.length === next.products?.length ? true : false)
