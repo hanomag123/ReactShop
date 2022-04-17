@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { StarRating } from '../StarRating/StarRating';
 import Rating from '@mui/material/Rating';
@@ -6,7 +6,7 @@ import Rating from '@mui/material/Rating';
 
 import styles from './ProductInfo.module.scss';
 
-export const ProductInfo = ({
+export const ProductInfo = memo(({
     img, name, price, setBusket, rating
 }) => {
     const [visible, setVisible] = useState(false)
@@ -25,4 +25,4 @@ export const ProductInfo = ({
             </div>
         </section>
     )
-}
+}, () => true)

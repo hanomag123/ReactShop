@@ -7,7 +7,7 @@ import logo from '../../assets/images/logo.png'
 
 import styles from  './Header.module.scss';
 
-export const Header = ({ busket , input, setInput, setPrice}) => {
+export const Header = React.memo(({ busket , input, setInput, setPrice}) => {
 
     return(
         <header className={styles.header}>
@@ -23,4 +23,4 @@ export const Header = ({ busket , input, setInput, setPrice}) => {
             <Busket busket={busket} input={input} setInput={setInput}/>
         </header>
     )
-}
+})

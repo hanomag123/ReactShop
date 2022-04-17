@@ -4,7 +4,7 @@ import styles from '../Header.module.scss';
 
 import busketIcon from '../../../assets/images/Busket/busket.svg';
 
-export const Busket = ({ busket, input , setInput }) => {
+export const Busket = memo(({ busket, input , setInput }) => {
 
     const getSum = () => {
         return busket.reduce((acc, el) => {
@@ -22,5 +22,5 @@ export const Busket = ({ busket, input , setInput }) => {
             <div className={styles.money}>$ {getSum()}</div>
         </div>
     )
-}
+})
 

@@ -1,4 +1,4 @@
-import React, { useEffect , useMemo, useState} from 'react';
+import React, { useEffect , useMemo, useState, useReducer} from 'react';
 
 import { ProductInfo } from '../../components/productInfo/ProductInfo';
 import { urlForProduct } from '../../constants';
@@ -11,13 +11,14 @@ import Checkbox from '@mui/material/Checkbox';
 export const Main = React.memo(({
     products, setProducts, setBusket, busket, input, selected, setSelected, price, setCheckPrice
 }) => {
-    const [filter, setFilter] = useState(JSON.parse(localStorage.getItem('filter')) || {
+    const Filter = {
         price: [0, 1000],
-        categorys: {'men\'s clothing': true, 
+        'men\'s clothing': true, 
                     'women\'s clothing': true, 
                     'electronics': true, 
-                    'jewelery': true}
-    })
+                    'jewelery': true
+    }
+    const [filter, setFilter] = useReducer((user, newData) => ({...user, ...newData}), Filter)
     const init = useMemo(() => {
         
     }, [])
@@ -45,9 +46,8 @@ export const Main = React.memo(({
     }, [input])
     useEffect(() => {
         let mainProduct = JSON.parse(localStorage.getItem('products'))
-        setProducts(mainProduct = mainProduct?.filter(v => v.price < filter.price[1] && v.price > filter.price[0] && filter.categorys[v.category]))
+        setProducts(mainProduct = mainProduct?.filter(v => v.price < filter.price[1] && v.price > filter.price[0] && filter[v.category]))
         localStorage.setItem('filter', JSON.stringify(filter))
-        localStorage.setItem('filteredArray', JSON.stringify(mainProduct))
     }, [filter])
     useEffect(() => {
         setProducts(current => current?.sort((a, b) => price ? a.price - b.price : b.price - a.price))
@@ -73,14 +73,17 @@ export const Main = React.memo(({
         }
     }
     const changeInput = e => {
+        console.log('hello')
         if (e.target.value < 0) {
             e.target.value = 0
         } else if (e.target.value > 1000) {
             e.target.value = 1000
         }
-        e.target.name === 'min' ? setFilter(current => current = {...current, price: [e.target.value, current.price[1]]}) : (
-            setFilter(current => current = {...current, price: [current.price[0], e.target.value]})
+        console.log(filter)
+        e.target.name === 'min' ? setFilter({price: [+e.target.value, filter.price[1]]}) : (
+            setFilter({price: [filter.price[0], +e.target.value]})
         )
+
     }
     const handleBlur = (e) => {
         if (e.target.value < 0) {
@@ -91,7 +94,8 @@ export const Main = React.memo(({
     };
     console.log('render')
     const changeBox = (e) => {
-        setFilter(current => Object.assign({}, current, current.categorys[e.target.id] = !current.categorys[e.target.id]))
+        // setFilter(current => Object.assign({}, current, current.categorys[e.target.id] = !current.categorys[e.target.id]))
+        setFilter({[e.target.id]: e.target.checked})
     }
     return (
         <>
@@ -114,7 +118,7 @@ export const Main = React.memo(({
                 <span>от</span><input name="min" value={filter.price[0]} onBlur={e => handleBlur(e)} onChange={e=>changeInput(e)} type="number" />
                 <span>до</span><input name="max" value={filter.price[1]} onBlur={e => handleBlur(e)} onChange={e=>changeInput(e)} type="number" />
                 <SliderPrice filter={filter} setFilter={setFilter}/>
-                {[...Array(category.length)].map((_, i) => <div key={i}><Checkbox checked={filter.categorys[category[i]]} onChange={e => changeBox(e)} id={category[i]} /><span>{category[i]}</span></div>)}
+                {[...Array(category.length)].map((_, i) => <div key={i}><Checkbox checked={filter[category[i]]} onChange={e => changeBox(e)} id={category[i]} /><span>{category[i]}</span></div>)}
             </div>
         </>
     )
